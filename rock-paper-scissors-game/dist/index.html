@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Rock, Paper, Scissors Game</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+<body>
+<!-- partial:index.partial.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock, Paper, Scissors Game</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <style>
+    .choice {
+      cursor: pointer;
+      width: 100px;
+      height: 100px;
+      margin: 10px;
+    }
+    #result {
+      margin-top: 20px;
+      font-size: 1.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="text-center">
+    <h2>Rock, Paper, Scissors Game</h2>
+    <p>Choose your move and see if you can beat the computer!</p>
+    <div class="choices">
+      <img src="https://img.icons8.com/ios-filled/100/000000/rock.png" alt="Rock" class="choice" data-choice="rock">
+      <img src="https://img.icons8.com/ios-filled/100/000000/paper.png" alt="Paper" class="choice" data-choice="paper">
+      <img src="https://img.icons8.com/ios-filled/100/000000/scissors.png" alt="Scissors" class="choice" data-choice="scissors">
+    </div>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    const choices = document.querySelectorAll('.choice');
+    const resultDisplay = document.getElementById('result');
+
+    function playGame(playerChoice) {
+      const computerChoice = ['rock', 'paper', 'scissors'][Math.floor(Math.random() * 3)];
+      const winner = determineWinner(playerChoice, computerChoice);
+      displayResult(winner, computerChoice);
+    }
+
+    function determineWinner(player, computer) {
+      if (player === computer) return 'draw';
+      if (
+        (player === 'rock' && computer === 'scissors') ||
+        (player === 'paper' && computer === 'rock') ||
+        (player === 'scissors' && computer === 'paper')
+      ) {
+        return 'player';
+      }
+      return 'computer';
+    }
+
+    function displayResult(winner, computerChoice) {
+      if (winner === 'draw') {
+        resultDisplay.textContent = `It's a draw! Computer also chose ${computerChoice}.`;
+      } else {
+        resultDisplay.textContent = `${winner === 'player' ? 'You win!' : 'Computer wins!'} Computer chose ${computerChoice}.`;
+      }
+    }
+
+    choices.forEach(choice => {
+      choice.addEventListener('click', function() {
+        playGame(this.dataset.choice);
+      });
+    });
+  </script>
+</body>
+</html>
+<!-- partial -->
+  <script  src="./script.js"></script>
+
+</body>
+</html>
